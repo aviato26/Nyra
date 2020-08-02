@@ -38,10 +38,10 @@
 
 			var loader = new GLTFLoader();
 
-			loader.load( './squid.glb', function ( gltf ) {
+			loader.load( './nya.glb', function ( gltf ) {
 
 			squid = gltf.scene.children[2];
-			squid.scale.set(.01, .01, .01)
+			//squid.scale.set(.01, .01, .01)
 
 			scene.add( gltf.scene );
 
@@ -62,6 +62,8 @@
 
 				renderer.render( scene, camera);
 			};
+			
+			scene.background = new THREE.Color(0xffffff)
 
 			animate();
 
