@@ -1,0 +1,71 @@
+
+
+<html>
+	<head>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+		</style>
+	</head>
+	<body>
+		<script src="three.js"></script>
+		<script type="module" src="loader.js"></script>
+
+		<script type="module" type="text/javascript">
+
+		  import { GLTFLoader } from '/loader.js';
+
+			let scene, camera, renderer, hlight, squid;
+
+			scene = new THREE.Scene();
+			camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 0.1, 50 );
+
+			renderer = new THREE.WebGLRenderer({ antialias: true });
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			document.body.appendChild( renderer.domElement );
+
+			var geometry = new THREE.BoxGeometry();
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			var cube = new THREE.Mesh( geometry, material );
+			//scene.add( cube );
+
+			hlight = new THREE.AmbientLight(0xffffff, 1);
+
+			scene.add(hlight);
+
+			camera.position.z = 10;
+
+			var loader = new GLTFLoader();
+
+			loader.load( './squid.glb', function ( gltf ) {
+
+			squid = gltf.scene.children[2];
+			squid.scale.set(.01, .01, .01)
+
+			scene.add( gltf.scene );
+
+			camera.position.z += 20
+
+			renderer.render(scene, camera);
+
+			}, undefined, function ( error ) {
+
+			console.error( error );
+
+			} );
+
+			var animate = function () {
+				requestAnimationFrame( animate );
+
+				squid.rotation.y += 0.01;
+
+				renderer.render( scene, camera);
+			};
+
+			animate();
+
+		</script>
+
+	</body>
+</html>
