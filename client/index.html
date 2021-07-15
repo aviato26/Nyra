@@ -34,8 +34,6 @@
 
 			scene.add(hlight);
 
-			camera.position.z = 10;
-
 			var loader = new GLTFLoader();
 
 			loader.load( './nya.glb', function ( gltf ) {
@@ -58,11 +56,11 @@
 			var animate = function () {
 				requestAnimationFrame( animate );
 
-				squid.rotation.y += 0.01;
+				//squid.rotation.y += 0.01;
 
 				renderer.render( scene, camera);
 			};
-			
+
 			scene.background = new THREE.Color(0xffffff)
 
 			animate();
